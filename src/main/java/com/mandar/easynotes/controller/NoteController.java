@@ -20,7 +20,7 @@ import com.mandar.easynotes.model.Note;
 import com.mandar.easynotes.repository.NoteRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/easy-notes-app")
 public class NoteController {
 
 	@Autowired
@@ -32,16 +32,16 @@ public class NoteController {
 		return noteRepository.findAll();
 	}
 
-	// Create a new Note
-	@PostMapping("/notes")
-	public Note createNote(@Valid @RequestBody Note note) {
-		return noteRepository.save(note);
-	}
-
 	// Get a Single Note
 	@GetMapping("/notes/{id}")
 	public Note getNoteById(@PathVariable(value = "id") Long noteId) {
 		return noteRepository.findById(noteId).orElseThrow(() -> new ResourceNotFoundException("Note", "id", noteId));
+	}
+
+	// Create a new Note
+	@PostMapping("/notes")
+	public Note createNote(@Valid @RequestBody Note note) {
+		return noteRepository.save(note);
 	}
 
 	// Update a Note
